@@ -1,5 +1,22 @@
 # @mastra/memory
 
+## 1.5.3-alpha.0
+
+### Patch Changes
+
+- Stop auto-applying `maxOutputTokens: 100_000` to observer and reflector models when users supply their own model. ([#13563](https://github.com/mastra-ai/mastra/pull/13563))
+
+  Previously, the 100k default was always injected regardless of model choice. Now it is only applied when using the built-in default model (`google/gemini-2.5-flash`). If you set a custom `observation.model` or `reflection.model`, no `maxOutputTokens` default is added — pass it explicitly in `modelSettings` if your model needs it.
+
+- Fixed stale continuation hints in observational memory. ([#13606](https://github.com/mastra-ai/mastra/pull/13606))
+
+  When newer outputs omit continuation hints, old hints are now cleared. This prevents outdated task and response guidance from appearing in later turns.
+
+- Fixed observational memory compatibility with Codex and other stream-only providers. Observer and reflector calls now use the streaming API internally, so providers that require `stream: true` in requests work correctly out of the box. ([#13563](https://github.com/mastra-ai/mastra/pull/13563))
+
+- Updated dependencies [[`88de7e8`](https://github.com/mastra-ai/mastra/commit/88de7e8dfe4b7e1951a9e441bb33136e705ce24e), [`edee4b3`](https://github.com/mastra-ai/mastra/commit/edee4b37dff0af515fc7cc0e8d71ee39e6a762f0), [`d5f0d8d`](https://github.com/mastra-ai/mastra/commit/d5f0d8d6a03e515ddaa9b5da19b7e44b8357b07b), [`09c3b18`](https://github.com/mastra-ai/mastra/commit/09c3b1802ff14e243a8a8baea327440bc8cc2e32), [`276246e`](https://github.com/mastra-ai/mastra/commit/276246e0b9066a1ea48bbc70df84dbe528daaf99), [`08ecfdb`](https://github.com/mastra-ai/mastra/commit/08ecfdbdad6fb8285deef86a034bdf4a6047cfca), [`524c0f3`](https://github.com/mastra-ai/mastra/commit/524c0f3c434c3d9d18f66338dcef383d6161b59c), [`3c6ef79`](https://github.com/mastra-ai/mastra/commit/3c6ef798481e00d6d22563be2de98818fd4dd5e0), [`9311c17`](https://github.com/mastra-ai/mastra/commit/9311c17d7a0640d9c4da2e71b814dc67c57c6369), [`d25b9ea`](https://github.com/mastra-ai/mastra/commit/d25b9eabd400167255a97b690ffbc4ee4097ded5), [`b03c0e0`](https://github.com/mastra-ai/mastra/commit/b03c0e0389a799523929a458b0509c9e4244d562), [`9257d01`](https://github.com/mastra-ai/mastra/commit/9257d01d1366d81f84c582fe02b5e200cf9621f4), [`0c33b2c`](https://github.com/mastra-ai/mastra/commit/0c33b2c9db537f815e1c59e2c898ffce2e395a79), [`191e5bd`](https://github.com/mastra-ai/mastra/commit/191e5bd29b82f5bda35243945790da7bc7b695c2), [`257d14f`](https://github.com/mastra-ai/mastra/commit/257d14faca5931f2e4186fc165b6f0b1f915deee), [`31c78b3`](https://github.com/mastra-ai/mastra/commit/31c78b3eb28f58a8017f1dcc795c33214d87feac), [`3c6ef79`](https://github.com/mastra-ai/mastra/commit/3c6ef798481e00d6d22563be2de98818fd4dd5e0), [`9257d01`](https://github.com/mastra-ai/mastra/commit/9257d01d1366d81f84c582fe02b5e200cf9621f4)]:
+  - @mastra/core@1.9.0-alpha.0
+
 ## 1.5.2
 
 ### Patch Changes
